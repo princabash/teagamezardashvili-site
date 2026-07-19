@@ -1,1 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ===== Authority bridge on teagamezardashvili.com → cardioiq.health. NOT a clone of /reports/ or /methodology/. ===== -->
+<title>CardioIQ — Physician-Built Cardiovascular Interpretation | Dr. Tea Gamezardashvili</title>
+<meta name="description" content="CardioIQ is a physician-built tool that reads cardiovascular lab panels against longevity-optimal targets — created by Dr. Tea Gamezardashvili, preventive cardiologist and lipidologist. For people who want more than 'normal,' and for clinicians who want time back.">
+<!-- Duplicate-content safety: point search engines to the real product home -->
+<link rel="canonical" href="https://cardioiq.health/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="CardioIQ — Physician-Built Cardiovascular Interpretation">
+<meta property="og:description" content="Read your labs against optimal, not just normal — built by a lipidologist, not a tech company.">
+<meta property="og:url" content="https://teagamezardashvili.com/cardioiq/">
+<meta property="og:site_name" content="Dr. Tea Gamezardashvili">
+<!-- TODO(Tea): set og:image to a real 1200x630 asset -->
+<meta property="og:image" content="https://teagamezardashvili.com/assets/og-cardioiq.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --navy:#0b1a2b; --navy-2:#0f2438; --navy-3:#16324b;
+    --gold:#d4a94a; --gold-soft:#e7c877;
+    --teal:#3fb6a8; --teal-soft:#7ad4c9;
+    --ink:#e9eef4; --ink-2:#b7c4d1; --ink-3:#8496a6;
+    --line:rgba(255,255,255,.09);
+    --card:rgba(255,255,255,.035);
+    --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    --serif:'Newsreader',Georgia,serif;
+    --maxw:900px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--navy); color:var(--ink); font-family:var(--serif); font-size:19px; line-height:1.7; -webkit-font-smoothing:antialiased}
+  a{color:var(--teal-soft); text-decoration:none}
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px}
+  .narrow{max-width:720px; margin:0 auto}
+
+  /* hero */
+  .hero{text-align:center; padding:70px 0 44px; border-bottom:1px solid var(--line)}
+  .kicker{font-family:var(--sans); font-size:13px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--gold)}
+  h1{font-family:var(--sans); font-weight:700; font-size:clamp(32px,6vw,52px); line-height:1.1; letter-spacing:-.02em; color:#fff; margin:18px auto 20px; max-width:16ch}
+  .hero .deck{font-family:var(--serif); font-size:clamp(19px,2.6vw,23px); line-height:1.5; color:var(--ink-2); max-width:34ch; margin:0 auto}
+  .trust{display:flex; flex-wrap:wrap; gap:10px 12px; justify-content:center; margin-top:28px; font-family:var(--sans); font-size:13px}
+  .trust span{background:var(--card); border:1px solid var(--line); border-radius:20px; padding:7px 15px; color:var(--ink-2)}
+
+  /* founder strip */
+  .founder{display:flex; gap:20px; align-items:center; justify-content:center; flex-wrap:wrap; padding:34px 0; border-bottom:1px solid var(--line); text-align:left}
+  .founder .av{flex:0 0 64px; height:64px; border-radius:50%; background:linear-gradient(135deg,var(--gold),var(--teal)); display:flex; align-items:center; justify-content:center; font-family:var(--sans); font-weight:700; color:var(--navy); font-size:22px}
+  .founder .m{font-family:var(--sans); font-size:14.5px; color:var(--ink-2); line-height:1.55; max-width:46ch}
+  .founder .m b{color:#fff; font-size:16px}
+  .founder .m .cred{color:var(--gold-soft)}
+
+  section{padding:46px 0; border-bottom:1px solid var(--line)}
+  h2{font-family:var(--sans); font-weight:700; font-size:clamp(24px,3.6vw,30px); color:#fff; letter-spacing:-.01em; margin:0 0 16px; text-align:center}
+  .sec-intro{color:var(--ink-2); text-align:center; max-width:52ch; margin:0 auto 30px; font-size:18px}
+  p{margin:0 0 20px}
+
+  /* what it is */
+  .what{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; font-family:var(--sans)}
+  .wc{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:22px 20px}
+  .wc .i{font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--teal-soft); margin-bottom:8px}
+  .wc h3{font-size:17px; color:#fff; font-weight:600; margin:0 0 6px}
+  .wc p{font-size:14.5px; color:var(--ink-2); margin:0; line-height:1.55}
+
+  /* split paths */
+  .paths{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+  .path{background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.02)); border:1px solid var(--line); border-radius:18px; padding:30px 28px; display:flex; flex-direction:column}
+  .path.clin{border-color:rgba(212,169,74,.32)}
+  .path .tag{font-family:var(--sans); font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; margin-bottom:12px}
+  .path.pat .tag{color:var(--teal-soft)} .path.clin .tag{color:var(--gold-soft)}
+  .path h3{font-family:var(--sans); font-size:22px; color:#fff; font-weight:700; margin:0 0 12px; line-height:1.25}
+  .path ul{list-style:none; padding:0; margin:0 0 22px}
+  .path li{position:relative; padding-left:24px; margin-bottom:10px; font-size:16px; color:var(--ink-2); line-height:1.5}
+  .path li::before{content:""; position:absolute; left:4px; top:10px; width:7px; height:7px; border-radius:50%}
+  .path.pat li::before{background:var(--teal)} .path.clin li::before{background:var(--gold)}
+  .path a.btn{margin-top:auto; display:inline-block; text-align:center; font-family:var(--sans); font-weight:700; font-size:15px; padding:13px 26px; border-radius:10px}
+  .path.pat a.btn{background:var(--gold); color:var(--navy)}
+  .path.pat a.btn:hover{background:var(--gold-soft)}
+  .path.clin a.btn{background:transparent; color:var(--gold-soft); border:1.5px solid rgba(212,169,74,.5)}
+  .path.clin a.btn:hover{border-color:var(--gold-soft); color:#fff}
+  .path .note{font-family:var(--sans); font-size:12.5px; color:var(--ink-3); margin-top:10px; text-align:center}
+
+  /* philosophy */
+  .philo{background:var(--card); border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:12px; padding:24px 26px; font-size:18px; color:var(--ink-2)}
+  .philo b{color:#fff}
+
+  .disclaimer{font-family:var(--sans); font-size:13.5px; line-height:1.6; color:var(--ink-3); max-width:60ch; margin:0 auto; text-align:center}
+  .disclaimer b{color:var(--ink-2)}
+
+  footer{padding:30px 0 60px; text-align:center; font-family:var(--sans); font-size:13px; color:var(--ink-3)}
+  footer a{color:var(--ink-3)}
+
+  @media(max-width:640px){
+    body{font-size:18px}
+    .what{grid-template-columns:1fr}
+    .paths{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<div style="border-bottom:1px solid rgba(255,255,255,.09)">
+  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;padding:14px 24px;font-family:'Inter',sans-serif;font-size:14px">
+    <a href="/" style="color:#e9eef4;font-weight:600;text-decoration:none">&larr; Dr. Tea Gamezardashvili</a>
+    <a href="https://cardioiq.health/" style="color:#7ad4c9;text-decoration:none">cardioiq.health &#8599;</a>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="kicker">A tool I built · Dr. Tea Gamezardashvili</div>
+    <h1>Read your labs against optimal, not just normal</h1>
+    <p class="deck">CardioIQ is a physician-built tool that interprets cardiovascular lab panels against longevity-optimal targets — created by a lipidologist, not a tech company.</p>
+    <div class="trust">
+      <span>Physician-built</span>
+      <span>Guideline-anchored</span>
+      <span>Longevity-calibrated</span>
+    </div>
+  </div>
+
+  <div class="founder">
+    <div class="av">TG</div>
+    <div class="m">
+      <b>Tea Gamezardashvili, MD, PhD, MHA, FACC</b> — <span class="cred">preventive cardiologist &amp; lipidologist.</span>
+      President, Georgian Atherosclerosis Association · National Coordinator, EAS Lipid Clinic Network (Georgia) · Academic Director, CMEA.
+      I built CardioIQ to bring the way I read a lipid panel in clinic — against optimal targets, not just population &ldquo;normal&rdquo; — to more people.
+    </div>
+  </div>
+
+  <section>
+    <h2>What CardioIQ is</h2>
+    <p class="sec-intro">A focused interpretation tool — not a diagnosis, not a device, not a replacement for a physician.</p>
+    <div class="what">
+      <div class="wc">
+        <div class="i">It reads</div>
+        <h3>Your lab values</h3>
+        <p>Full lipid panel plus ApoB, Lp(a), and cardiometabolic markers — the numbers that actually drive risk.</p>
+      </div>
+      <div class="wc">
+        <div class="i">Against</div>
+        <h3>Optimal targets</h3>
+        <p>Guideline-anchored, risk-calibrated targets for prevention over decades — not just whether you're &ldquo;in range.&rdquo;</p>
+      </div>
+      <div class="wc">
+        <div class="i">Producing</div>
+        <h3>A clear report</h3>
+        <p>A structured, physician-grade read of each marker, written to bring to your own doctor.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Where would you like to start?</h2>
+    <p class="sec-intro">CardioIQ serves two people — someone reading their own results, and the clinician who guides them.</p>
+    <div class="paths">
+
+      <div class="path pat">
+        <div class="tag">For you &amp; your results</div>
+        <h3>I have my labs — read them against optimal</h3>
+        <ul>
+          <li>&ldquo;Normal&rdquo; on a standard panel isn't the same as optimal for your risk.</li>
+          <li>See ApoB and Lp(a) — the numbers a standard panel often misses — in context.</li>
+          <li>A physician-grade report you can take to your own doctor.</li>
+        </ul>
+        <a class="btn" href="https://cardioiq.health/reports/">See how a CardioIQ report works →</a>
+        <div class="note">Not a diagnosis · interpretation you bring to your physician</div>
+      </div>
+
+      <div class="path clin">
+        <div class="tag">For clinicians</div>
+        <h3>I'm a physician interested in CardioIQ</h3>
+        <ul>
+          <li>A structured, guideline-anchored read of a patient's lipid &amp; cardiometabolic panel.</li>
+          <li>Built on the reasoning of a preventive cardiologist &amp; lipidologist.</li>
+          <li>Designed to support — never replace — your clinical judgement.</li>
+        </ul>
+        <!-- Points to the site's own contact section (Formspree form + LinkedIn). Swap to /reports/ Premium once a dedicated clinician page exists. -->
+        <a class="btn" href="/#contact">For clinicians — get in touch →</a>
+        <div class="note">See the methodology: <a href="https://cardioiq.health/methodology/">how CardioIQ works →</a></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>My philosophy</h2>
+    <div class="narrow">
+      <div class="philo">
+        <p style="margin:0"><b>Prevention is measured in decades, not single readings.</b> Most people are told their labs are &ldquo;normal.&rdquo; The more useful question — for a longer, healthier life — is whether they're <em>optimal</em> for that person's risk. CardioIQ operationalizes established cardiovascular-prevention frameworks — guideline-based risk thinking, ApoB- and Lp(a)-aware lipid assessment, and residual-risk logic — into one clear, evidence-anchored read. It doesn't invent its own rules; it makes the ones I use in clinic legible.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="border-bottom:none">
+    <div class="disclaimer">
+      <b>Important.</b> CardioIQ provides educational interpretation of lab values against prevention-focused targets. It does not diagnose disease, recommend or prescribe treatment, promise outcomes, or replace your physician, who makes all clinical decisions. It is not a regulatory-cleared medical device.
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    © 2026 · Dr. Tea Gamezardashvili · <a href="https://cardioiq.health/">cardioiq.health</a> · <a href="https://cardioiq.health/methodology/">How it works</a> · <a href="https://cardioiq.health/reports/">Reports</a>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "CardioIQ — Physician-Built Cardiovascular Interpretation",
+  "description": "A physician-built tool by Dr. Tea Gamezardashvili that reads cardiovascular lab panels against longevity-optimal targets. For patients and clinicians.",
+  "url": "https://teagamezardashvili.com/cardioiq/",
+  "mainEntity": {
+    "@type": "Person",
+    "name": "Tea Gamezardashvili",
+    "honorificSuffix": "MD, PhD, MHA, FACC",
+    "jobTitle": "Preventive Cardiologist & Lipidologist",
+    "url": "https://teagamezardashvili.com"
+  },
+  "about": { "@type": "Organization", "name": "CardioIQ", "url": "https://cardioiq.health" }
+}
+</script>
+
+</body>
+</html>
