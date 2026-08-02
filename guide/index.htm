@@ -1,1 +1,216 @@
+<!DOCTYPE html>
+<!--
+  teagamezardashvili.com/guide/  — lead-capture landing page
+  Deploy as: guide/index.html  (matches /cardioiq/ pattern already live on this site)
 
+  Restyled to match the live site's real design tokens exactly
+  (pulled from index.html: --bg/--gold/--teal palette, EB Garamond
+  + Inter + Noto Sans Georgian, nav/footer treatment).
+
+  ============================================================
+  TODO BEFORE GOING LIVE:
+  ============================================================
+  1. Form currently shows a client-side thank-you only — not
+     wired to a real endpoint yet. Two options:
+       a) Fast: point the <form> action at Formspree, reusing the
+          pattern already live on this site's contact form
+          (https://formspree.io/f/xvznyglo) — but Formspree only
+          notifies you by email, it will NOT automatically send
+          the visitor the article. Fine as a stopgap if you're
+          checking + forwarding manually at low volume.
+       b) Proper: wire to your ESP (Mailchimp/ConvertKit/Brevo) so
+          new sign-ups are tagged and the article email
+          (heart-attack-prevention-email.html) sends automatically.
+          Tell Claude which ESP and this gets wired directly.
+  2. Add this page's URL to sitemap.xml (snippet given in chat).
+  3. Add a link to it from the homepage (blog card and/or nav
+     link snippets given in chat) — otherwise it's an orphan page.
+  ============================================================
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10 Steps to a Heart That Lasts — Tea Gamezardashvili, MD</title>
+<meta name="description" content="A free, guideline-based framework for lowering heart-attack risk — from Dr. Tea Gamezardashvili, preventive cardiologist and lipidologist.">
+<meta property="og:title" content="10 Steps to a Heart That Lasts">
+<meta property="og:description" content="A free, guideline-based framework for lowering heart-attack risk — from Dr. Tea Gamezardashvili, preventive cardiologist and lipidologist.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://teagamezardashvili.com/guide/">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://teagamezardashvili.com/guide/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&family=Noto+Sans+Georgian:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#0D1E35;--bg2:#112240;--bg3:#162B50;--bg4:#09152A;
+    --white:#fff;--paper:#ECF1FA;--paper2:#D4E0F5;
+    --gold:#C8A44A;--gold2:#DEBA6A;--gold-pale:rgba(200,164,74,.08);
+    --teal:#2BBFBF;--teal-dim:rgba(43,191,191,.1);
+    --muted:rgba(236,241,250,.6);--muted2:rgba(236,241,250,.35);
+    --border:rgba(255,255,255,.07);--border-gold:rgba(200,164,74,.2);
+  }
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--paper);line-height:1.7;min-height:100vh}
+  a{color:inherit;text-decoration:none}
+
+  header{padding:1.5rem 2rem;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border)}
+  .brand{display:flex;align-items:center;gap:10px}
+  .brand-name{font-family:'EB Garamond',serif;font-size:18px;font-weight:600;color:#fff}
+  .brand-name span{color:var(--gold)}
+  .brand-sub{font-size:10px;color:var(--teal);letter-spacing:.1em;font-weight:700;border:1px solid rgba(43,191,191,.2);padding:2px 8px;border-radius:2px}
+
+  main{padding:4.5rem 2rem 6rem;display:flex;align-items:center;justify-content:center}
+  .panel{
+    width:100%;max-width:980px;
+    display:grid;grid-template-columns:1fr 1fr;gap:1px;
+    background:var(--border);border:1px solid var(--border);border-radius:2px;overflow:hidden;
+  }
+
+  /* LEFT — credential + guide visual */
+  .visual-side{background:var(--bg4);padding:3rem 2.75rem;display:flex;flex-direction:column;justify-content:center;position:relative}
+  .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--teal);margin-bottom:1.4rem;border:1px solid rgba(43,191,191,.2);padding:5px 13px;border-radius:2px;background:var(--teal-dim);width:fit-content}
+  .pulse{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite;flex-shrink:0}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+
+  .guide-title{font-family:'EB Garamond',serif;font-size:clamp(1.7rem,3vw,2.3rem);font-weight:500;color:#fff;line-height:1.25;margin-bottom:1rem}
+  .guide-title em{font-style:normal;color:var(--gold)}
+  .rule{width:36px;height:1px;background:var(--gold);margin:.4rem 0 1.5rem;opacity:.6}
+  .guide-desc{font-size:14px;color:var(--muted);line-height:1.85;margin-bottom:1.75rem}
+
+  .cred-row{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:1.5rem}
+  .cred{font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--muted);border:1px solid var(--border);padding:3px 11px;border-radius:2px}
+
+  .steps-preview{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:.5rem}
+  .sp-item{background:var(--bg3);padding:.7rem .9rem;font-size:12px;color:var(--muted2);display:flex;gap:10px;align-items:center}
+  .sp-n{font-family:'EB Garamond',serif;color:var(--gold);font-size:13px;flex-shrink:0}
+
+  /* RIGHT — form */
+  .form-side{background:var(--bg2);padding:3rem 2.75rem;display:flex;flex-direction:column;justify-content:center}
+  .form-side h2{font-family:'EB Garamond',serif;font-size:1.6rem;font-weight:500;color:#fff;line-height:1.3;margin-bottom:.6rem}
+  .form-side p.sub{font-size:13px;color:var(--muted);line-height:1.8;margin-bottom:1.75rem}
+
+  .fr{margin-bottom:1rem}
+  .fr label{display:block;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted2);margin-bottom:5px}
+  .fr label .req{color:var(--gold)}
+  .fr input{width:100%;padding:11px 13px;background:var(--bg);border:1px solid var(--border);border-radius:2px;font-size:14px;color:#fff;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s}
+  .fr input:focus{border-color:rgba(200,164,74,.4)}
+
+  .sub-btn{width:100%;background:var(--gold);color:var(--bg);border:none;padding:13px;border-radius:2px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;letter-spacing:.05em;text-transform:uppercase;transition:background .2s;margin-top:.5rem}
+  .sub-btn:hover{background:var(--gold2)}
+
+  .disclaimer{font-size:11px;line-height:1.7;color:var(--muted2);margin-top:1.1rem}
+  .powered{font-size:11px;color:var(--muted2);margin-top:1.6rem;padding-top:1.1rem;border-top:1px solid var(--border)}
+  .powered a{color:var(--teal);font-weight:600}
+  .powered a:hover{text-decoration:underline}
+
+  /* thank-you */
+  .thankyou{display:none}
+  .thankyou.active{display:block}
+  .form-side.submitted .lead-form{display:none}
+  .thankyou .check{width:44px;height:44px;border-radius:50%;background:var(--teal);color:var(--bg);display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:1.1rem;font-weight:700}
+  .cta-secondary{display:inline-block;margin-top:1.4rem;padding:12px 22px;border-radius:2px;border:1px solid var(--border-gold);color:var(--gold);font-weight:700;font-size:12px;letter-spacing:.05em;text-transform:uppercase;transition:background .2s}
+  .cta-secondary:hover{background:var(--gold-pale)}
+
+  footer{padding:2rem;text-align:center;font-size:11px;color:var(--muted2);border-top:1px solid var(--border)}
+  footer a{color:var(--teal)}
+
+  @media(max-width:820px){
+    .panel{grid-template-columns:1fr}
+    .visual-side{padding:2.5rem 2rem}
+    .form-side{padding:2.5rem 2rem}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="brand" href="https://teagamezardashvili.com/">
+    <div class="brand-name">Tea <span>Gamezardashvili</span></div>
+    <span class="brand-sub">CardioIQ</span>
+  </a>
+</header>
+
+<main>
+  <div class="panel">
+
+    <!-- LEFT -->
+    <div class="visual-side">
+      <div class="hero-eyebrow"><span class="pulse"></span> Free physician-written guide</div>
+
+      <h1 class="guide-title">10 Steps to a Heart That Lasts</h1>
+      <div class="rule"></div>
+      <p class="guide-desc">A guideline-based framework for lowering heart-attack risk — over decades, not just at your next checkup. Written by a preventive cardiologist and lipidologist.</p>
+
+      <div class="cred-row">
+        <span class="cred">MD</span>
+        <span class="cred">PhD</span>
+        <span class="cred">FACC</span>
+        <span class="cred">EAS-LCN National Coordinator</span>
+      </div>
+
+      <div class="steps-preview">
+        <div class="sp-item"><span class="sp-n">01</span> Tobacco &amp; movement</div>
+        <div class="sp-item"><span class="sp-n">02</span> Diet, weight &amp; sodium</div>
+        <div class="sp-item"><span class="sp-n">03</span> LDL, blood pressure &amp; glucose</div>
+        <div class="sp-item"><span class="sp-n">04</span> Sleep, stress &amp; follow-up</div>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="form-side" id="formSide">
+
+      <div class="lead-form">
+        <h2>Get the Framework in Your Inbox</h2>
+        <p class="sub">Ten evidence-based steps clinicians use to lower heart-attack risk — anchored to current ACC/AHA and ESC guidance. Free, sent straight to you.</p>
+
+        <form id="leadForm" onsubmit="return handleSubmit(event)">
+          <div class="fr">
+            <label for="firstName">First Name<span class="req">*</span></label>
+            <input type="text" id="firstName" name="firstName" required autocomplete="given-name">
+          </div>
+          <div class="fr">
+            <label for="lastName">Last Name<span class="req">*</span></label>
+            <input type="text" id="lastName" name="lastName" required autocomplete="family-name">
+          </div>
+          <div class="fr">
+            <label for="email">Email<span class="req">*</span></label>
+            <input type="email" id="email" name="email" required autocomplete="email">
+          </div>
+          <button type="submit" class="sub-btn">Send Me the Guide</button>
+        </form>
+
+        <p class="disclaimer">Educational information only — not a diagnosis or personalized medical advice. This does not replace care from your own physician.</p>
+        <p class="powered">Powered by <a href="https://cardioiq.health" target="_blank" rel="noopener">CardioIQ</a> — physician-built cardiovascular intelligence.</p>
+      </div>
+
+      <div class="thankyou" id="thankyou">
+        <div class="check">&#10003;</div>
+        <h2>Check your inbox</h2>
+        <p class="sub">The guide is on its way to <strong id="emailConfirm"></strong>. While you wait, see how your own labs compare to longevity-optimal targets — free, no sign-up.</p>
+        <a class="cta-secondary" href="https://cardioiq.health/check/?utm_source=teagamezardashvili&utm_medium=leadmagnet&utm_content=heart-attack-guide" target="_blank" rel="noopener">See where my numbers sit →</a>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer>
+  © 2026 · Tea Gamezardashvili, MD PhD MHA FACC · <a href="https://teagamezardashvili.com/">teagamezardashvili.com</a>
+</footer>
+
+<script>
+  function handleSubmit(e){
+    e.preventDefault();
+    // NOTE: front-end only for now — see TODO block at top of file
+    // for wiring to Formspree (fast) or your ESP (proper automation).
+    const email = document.getElementById('email').value;
+    document.getElementById('emailConfirm').textContent = email;
+    document.getElementById('formSide').classList.add('submitted');
+    document.getElementById('thankyou').classList.add('active');
+    return false;
+  }
+</script>
+
+</body>
+</html>
