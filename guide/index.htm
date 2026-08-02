@@ -8,23 +8,27 @@
   + Inter + Noto Sans Georgian, nav/footer treatment).
 
   ============================================================
-  TODO BEFORE GOING LIVE:
+  STATUS: Formspree wired (stopgap — manual sending)
   ============================================================
-  1. Form currently shows a client-side thank-you only — not
-     wired to a real endpoint yet. Two options:
-       a) Fast: point the <form> action at Formspree, reusing the
-          pattern already live on this site's contact form
-          (https://formspree.io/f/xvznyglo) — but Formspree only
-          notifies you by email, it will NOT automatically send
-          the visitor the article. Fine as a stopgap if you're
-          checking + forwarding manually at low volume.
-       b) Proper: wire to your ESP (Mailchimp/ConvertKit/Brevo) so
-          new sign-ups are tagged and the article email
-          (heart-attack-prevention-email.html) sends automatically.
-          Tell Claude which ESP and this gets wired directly.
-  2. Add this page's URL to sitemap.xml (snippet given in chat).
-  3. Add a link to it from the homepage (blog card and/or nav
-     link snippets given in chat) — otherwise it's an orphan page.
+  Form now POSTs to https://formspree.io/f/xvznyglo — the same
+  endpoint as this site's contact form. Submissions arrive as an
+  email notification to Tea (subject: "New Guide Lead —
+  teagamezardashvili.com/guide/"), tagged with a hidden "source"
+  field so they're distinguishable from contact-form messages in
+  the inbox.
+
+  IMPORTANT — this does NOT automatically email the article to
+  the visitor. For now, each lead must be sent the article
+  manually (heart-attack-prevention-email.html has the ready-made
+  copy — paste its body into a reply). Fine at low volume; once
+  volume grows, wire an ESP (Mailchimp/ConvertKit/Brevo) so the
+  article sends automatically on sign-up — tell Claude which ESP
+  and this gets swapped in directly.
+
+  Also still needed:
+  - Add this page's URL to sitemap.xml (snippet given in chat).
+  - Homepage already links here (blog card + nav link added to
+    index.html in the previous step).
   ============================================================
 -->
 <html lang="en">
@@ -164,7 +168,7 @@
         <h2>Get the Framework in Your Inbox</h2>
         <p class="sub">Ten evidence-based steps clinicians use to lower heart-attack risk — anchored to current ACC/AHA and ESC guidance. Free, sent straight to you.</p>
 
-        <form id="leadForm" onsubmit="return handleSubmit(event)">
+        <form id="leadForm" action="https://formspree.io/f/xvznyglo" method="POST" onsubmit="return handleSubmit(event)">
           <div class="fr">
             <label for="firstName">First Name<span class="req">*</span></label>
             <input type="text" id="firstName" name="firstName" required autocomplete="given-name">
@@ -177,7 +181,10 @@
             <label for="email">Email<span class="req">*</span></label>
             <input type="email" id="email" name="email" required autocomplete="email">
           </div>
-          <button type="submit" class="sub-btn">Send Me the Guide</button>
+          <input type="hidden" name="_subject" value="New Guide Lead — teagamezardashvili.com/guide/">
+          <input type="hidden" name="source" value="Heart-Attack Prevention Guide landing page">
+          <button type="submit" class="sub-btn" id="submitBtn">Send Me the Guide</button>
+          <p id="formError" class="disclaimer" style="color:#e05a5a;display:none;margin-top:10px"></p>
         </form>
 
         <p class="disclaimer">Educational information only — not a diagnosis or personalized medical advice. This does not replace care from your own physician.</p>
@@ -202,12 +209,36 @@
 <script>
   function handleSubmit(e){
     e.preventDefault();
-    // NOTE: front-end only for now — see TODO block at top of file
-    // for wiring to Formspree (fast) or your ESP (proper automation).
+    const form = document.getElementById('leadForm');
+    const btn = document.getElementById('submitBtn');
+    const errEl = document.getElementById('formError');
     const email = document.getElementById('email').value;
-    document.getElementById('emailConfirm').textContent = email;
-    document.getElementById('formSide').classList.add('submitted');
-    document.getElementById('thankyou').classList.add('active');
+
+    errEl.style.display = 'none';
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(function(r){
+      if (r.ok) {
+        document.getElementById('emailConfirm').textContent = email;
+        document.getElementById('formSide').classList.add('submitted');
+        document.getElementById('thankyou').classList.add('active');
+      } else {
+        errEl.textContent = 'Something went wrong — please try again.';
+        errEl.style.display = 'block';
+        btn.textContent = 'Send Me the Guide';
+        btn.disabled = false;
+      }
+    }).catch(function(){
+      errEl.textContent = 'Something went wrong — please try again.';
+      errEl.style.display = 'block';
+      btn.textContent = 'Send Me the Guide';
+      btn.disabled = false;
+    });
     return false;
   }
 </script>
