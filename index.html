@@ -214,6 +214,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 .edu-h{font-size:14px;font-weight:600;color:#fff;margin-bottom:7px}
 .edu-p{font-size:12px;color:var(--muted2);line-height:1.65}
 .edu-link{font-size:11px;color:var(--teal);display:block;margin-top:8px}
+.edu-video{background:var(--bg3);border:1px solid var(--border);border-radius:2px;padding:1.75rem;margin-top:2.5rem;display:flex;gap:1.75rem;align-items:flex-start;flex-wrap:wrap;transition:border-color .2s}
+.edu-video:hover{border-color:var(--border-gold)}
+.edu-video video{width:240px;max-width:100%;border-radius:2px;background:#000;flex-shrink:0;display:block}
+.edu-video-body{flex:1;min-width:220px}
+.edu-video-note{font-size:10px;color:var(--muted2);opacity:.75;margin-top:10px;font-style:italic}
 /* BLOG */
 .blog-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-top:2.5rem}
 .blog-card{background:var(--bg3);border:1px solid var(--border);border-radius:2px;overflow:hidden;transition:border-color .2s}
@@ -615,8 +620,21 @@ body.lang-ka .cf, body.lang-ka .fr input, body.lang-ka .fr textarea, body.lang-k
   <div class="si">
     <span class="ey"><span class="en">Educational Resources</span><span class="ka">საგანმანათლებლო რესურსები</span></span>
     <h2 class="sh"><span class="en">Science, explained clearly</span><span class="ka">მეცნიერება — ყველასთვის გასაგებად</span></h2>
+    <div class="edu-video" id="featured-video">
+      <video controls preload="metadata" playsinline poster="">
+        <source src="/assets/video/cardioiq-from-confusion-to-confidence.mp4" type="video/mp4">
+      </video>
+      <div class="edu-video-body">
+        <div class="edu-h en">CardioIQ: From Confusion to Confidence</div>
+        <div class="edu-h ka">CardioIQ: აღრევიდან — გარკვევამდე</div>
+        <p class="edu-p en">A short walkthrough of how CardioIQ turns a lab report into a clear, organized risk picture — helping you start the conversation with your physician prepared.</p>
+        <p class="edu-p ka">მოკლე მიმოხილვა იმისა, თუ როგორ გარდაქმნის CardioIQ ლაბორატორიულ ანალიზს გასაგებ, სტრუქტურირებულ რისკის სურათად — რომ ექიმთან საუბარს მომზადებული შეხვდეთ.</p>
+        <p class="edu-video-note en">Sample report shown is an illustrative, synthetic example — not an actual patient.</p>
+        <p class="edu-video-note ka">ნაჩვენები რეპორტი დემონსტრაციული, გამოგონილი მაგალითია — არა რეალური პაციენტის მონაცემი.</p>
+      </div>
+    </div>
     <div class="edu-grid">
-      <div class="edu-card"><div class="edu-icon">🎬</div><div><div class="edu-h en">Video series — Georgian & English</div><div class="edu-h ka">ვიდეო სერია — ქართული და ინგლისური</div><p class="edu-p en">Short, science-based videos on cardiovascular health, longevity, and clinical intelligence — for patients and physicians. Coming to YouTube.</p><p class="edu-p ka">მოკლე, მეცნიერებაზე დაფუძნებული ვიდეოები CVD-ის, დღეგრძელობისა და Clinical Intelligence-ის შესახებ. გამოჩნდება YouTube-ზე.</p><a href="https://youtube.com" target="_blank" class="edu-link">YouTube →</a></div></div>
+      <div class="edu-card"><div class="edu-icon">🎬</div><div><div class="edu-h en">Video series — Georgian & English</div><div class="edu-h ka">ვიდეო სერია — ქართული და ინგლისური</div><p class="edu-p en">Short, science-based videos on cardiovascular health, longevity, and clinical intelligence — for patients and physicians.</p><p class="edu-p ka">მოკლე, მეცნიერებაზე დაფუძნებული ვიდეოები CVD-ის, დღეგრძელობისა და Clinical Intelligence-ის შესახებ.</p><a href="#featured-video" class="edu-link">Watch above ↑ / ზემოთ ↑</a></div></div>
       <div class="edu-card"><div class="edu-icon">📖</div><div><div class="edu-h en">CardioIQ Knowledge Library</div><div class="edu-h ka">CardioIQ ცოდნის ბიბლიოთეკა</div><p class="edu-p en">Evidence-based guides on cardiovascular risk, lipid management, Lp(a), ApoB, and healthy longevity.</p><p class="edu-p ka">მტკიცებულებებზე დაფუძნებული სახელმძღვანელოები CVD რისკის, ლიპიდების მართვის, Lp(a), ApoB-ის შესახებ.</p><a href="https://cardioiq.health" target="_blank" class="edu-link">cardioiq.health →</a></div></div>
       <div class="edu-card"><div class="edu-icon">🎓</div><div><div class="edu-h en">CME & Physician Education</div><div class="edu-h ka">CME და ექიმთა განათლება</div><p class="edu-p en">Continuing medical education on lipidology and CVD prevention — through GAA and Georgian-LCN.</p><p class="edu-p ka">CME ლიპიდოლოგიასა და CVD პრევენციაში — GAA-ისა და Georgian-LCN-ის მეშვეობით.</p><a href="http://athero-geo.com" target="_blank" class="edu-link">athero-geo.com →</a></div></div>
       <div class="edu-card"><div class="edu-icon">📊</div><div><div class="edu-h en">Annual CVD Report — Georgia</div><div class="edu-h ka">წლიური CVD ანგარიში — საქართველო</div><p class="edu-p en">The annual State of Cardiovascular Health in Georgia report — data, analysis, and policy recommendations.</p><p class="edu-p ka">გულ-სისხლძარღვთა ჯანმრთელობის მდგომარეობა საქართველოში — ყოველწლიური ანგარიში.</p></div></div>
